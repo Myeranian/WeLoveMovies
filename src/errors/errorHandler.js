@@ -1,6 +1,6 @@
-function errorHandler(err, req, res, next) {
-    const { status = 500, message = "Something went wrong!" } = err;
-    response.status(status).json({ err: message });
+function errorHandler(error, request, response, next) {
+    const { status = 500, message = "Something went wrong!" } = error;
+    response.status(status).json({ error: message });
   }
   
   module.exports = errorHandler;

@@ -1,16 +1,12 @@
 const router = require("express").Router({ mergeParams: true });
 const controller = require("./movies.controller");
 const methodNotAllowed = require("../errors/methodNotAllowed");
+const notFound = require("../errors/notFound");
 
 router
   .route("/")
   .get(controller.list)
-  .all(methodNotAllowed);
-  
-/* router
-  .route("/?is_showing=true")
-  .get(controller.list)
-  .all(methodNotAllowed); */   
+  .all(methodNotAllowed); 
 
 router  
   .route("/:movieId")
@@ -23,9 +19,13 @@ router
   .all(methodNotAllowed);
 
 router
-  .route("/:movieId/reviews")   //--reviews should include critic key with critic details
+  .route("/:movieId/reviews")  
   .get(controller.readMoviesReviews)
   .all(methodNotAllowed);
+
+router
+  .route("/:movieId/critics")
+  .all(notFound);  
 
   
 module.exports = router;
